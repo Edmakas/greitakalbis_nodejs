@@ -25,26 +25,36 @@ function mainPage(request, response){
 }
 
 function calcPage(request, response){
-	let resFromjloop = 0
-    for(let i = 1; i < 3; i++){
-		resFromjloop += jloop(i);
+	let i = 0;
+	let res = 0;
+    
+	res =+ iloop();
+
+	function iloop(){
+		if(i < 1000){
+
+			setTimeout(()=> jloop(i),0 )
+			i++;
+		}
 	}
-	cachedResult = resFromjloop;
+    
+	iloop();
+
+	cachedResult = res;
 	response.end('calculated!');
 }
 
 function jloop (i){
 	let res = 0;	
-	for(let j = 1; j < 10; j++){
+	for(let j = 1; j < 1000; j++){
 		n = i % j;
-		console.log("Liekana i: ", i)
-		console.log("Liekana j: ", j)
+		console.log("Parametras i: ", i)
+		console.log("For counteris j: ", j)
 		console.log("Liekana: ", n)
 		let randomskaiciai = Math.random();
-		console.log("randomskaiciai: ", randomskaiciai);
+		// console.log("randomskaiciai: ", randomskaiciai);
 		res += n * (randomskaiciai > 0.5 ? 1 : -1);
-		console.log('------------------------------------------------------------vidus j',j)
-		console.log('vidus res',res)
+		console.log('Rezultatas res',res)
 	}
 	console.log("Grazinu: ", res)
 	return res;
