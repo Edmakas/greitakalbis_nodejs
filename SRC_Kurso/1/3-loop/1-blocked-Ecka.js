@@ -28,34 +28,33 @@ function calcPage(request, response){
 	let i = 0;
 	let res = 0;
     
-	res =+ iloop();
 
 	function iloop(){
-		if(i < 1000){
-
-			setTimeout(()=> jloop(i),0 )
+		if(i < 20000){
+			res += jloop(i);
 			i++;
+			// setTimeout(iloop,0 )
+			setImmediate(iloop);
+			console.log('Rezultatas iloop =========================');
+		} else {
+			cachedResult = res;
+			response.end('calculated!');
 		}
 	}
     
 	iloop();
-
-	cachedResult = res;
-	response.end('calculated!');
 }
 
 function jloop (i){
 	let res = 0;	
-	for(let j = 1; j < 1000; j++){
+	for(let j = 1; j < 20000; j++){
 		n = i % j;
-		console.log("Parametras i: ", i)
-		console.log("For counteris j: ", j)
-		console.log("Liekana: ", n)
+		// console.log("Parametras i: ", i)
+		// console.log("For counteris j: ", j)
+		// console.log("Liekana: ", n)
 		let randomskaiciai = Math.random();
 		// console.log("randomskaiciai: ", randomskaiciai);
-		res += n * (randomskaiciai > 0.5 ? 1 : -1);
-		console.log('Rezultatas res',res)
+		res += n * (randomskaiciai > 0.5 ? 1 : -1);		
 	}
-	console.log("Grazinu: ", res)
 	return res;
 }
